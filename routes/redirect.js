@@ -6,11 +6,11 @@ const conf = nconf.get(process.env.NODE_ENV || 'dev');
 routes.get('/:short', async function(req,res,next){
     try{
         if(!req.params.short){
-            return res.redirect(conf.origin)
+            return res.redirect(conf.origin+'/404')
         }
         const doc = await UrlShorterModel.findOne({shortUrl:req.params.short});
         if(!doc || !doc.originUrl){
-            return res.redirect(conf.origin)
+            return res.redirect(conf.origin+'/404')
         }
         res.redirect(doc.originUrl)
     }

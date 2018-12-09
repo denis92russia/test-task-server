@@ -1,17 +1,19 @@
 const routes = require('express').Router();
 const axios = require('axios');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const randomstring = require("randomstring");
 const UrlShorterModel = mongoose.model('urlshorter');
 
 routes.get('/checkUrl/', async function (req, res, next) {
     try {
+        console.log(req.query.url)
         if (!req.query.url) {
             return res.status(400).send({ message: 'url is required' });
         }
         const { status } = await axios({ url: req.query.url }).catch(e => {
             return { status: 404 }
         });
-
+        console.log(status)
         res.status(200).send({ success: status === 200 ? true : false });
     }
     catch (e) {
@@ -70,11 +72,12 @@ routes.get('/check-short', async function (req, res, next) {
 })
 routes.put('/update-short', async function(req,res,next){
     try{
+        console.log(req.body)
         if(!req.body.originUrl || !req.body.shortUrl){
             res.sendStatus(400);
         }
         const doc = await UrlShorterModel.findOneAndUpdate({originUrl:req.body.originUrl},{$set:{shortUrl:req.body.shortUrl}});
-        res.status(200).send({success:true});
+        res.status(200).send({success:true, shortUrl: req.body.shortUrl});
 
     } 
     catch(e){
