@@ -1,0 +1,10 @@
+{
+    "dev":{
+        "port": "4000",
+        "origin": "http://127.0.0.1:4200",
+        "db_uri": "mongodb://denis:dsadsa111@ds125574.mlab.com:25574/test-project"
+    },
+    "prod":{
+        
+    }
+}
