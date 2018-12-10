@@ -25,6 +25,6 @@ app.use(cors(corsOptions));
 
 
 app.use('/app',appRoutes);
-app.use(redirectRoutes);
+app.use('/app/url', redirectRoutes);
 
 app.listen(4000);
