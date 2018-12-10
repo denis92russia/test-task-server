@@ -18,6 +18,9 @@ var corsOptions = {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.get('/chec', function(req,res,next){
+    res.send({message:'ok'})
+})
 app.use(cors(corsOptions));
 
 
